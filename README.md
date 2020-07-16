@@ -12,7 +12,7 @@ Please note the following files:
 
 If you observe this (for instance, by reloading the webview) you receive the following:
 
-![Network error](./img/error-on-147.png)
+![Network error](./src/img/error-on-147.png)
 
 The details are:
 
