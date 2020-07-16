@@ -14,9 +14,12 @@ export default class View implements vscode.Disposable {
     private initialize() {
         const { panel, context } = this;
         const onDiskPath = vscode.Uri.file(path.join(context.extensionPath, 'frontend', 'index.html'));
-        const iframeSrc = panel.webview.asWebviewUri(onDiskPath);
-        const iframeUri = iframeSrc.with({ scheme: 'vscode-resource' });
+        const iframeUri = panel.webview.asWebviewUri(onDiskPath);
+        // const iframeUri = iframeSrc.with({ scheme: 'vscode-resource' });
         const allowedFrameSrc = panel.webview.cspSource;
+
+        const scriptSrcPath = vscode.Uri.file(path.join(context.extensionPath, 'out', 'host', 'main.js'));
+        const scriptSrcUri = panel.webview.asWebviewUri(scriptSrcPath);
 
         const outputHtml = `<!DOCTYPE html>
         <html lang="en">
@@ -43,6 +46,7 @@ export default class View implements vscode.Disposable {
         <body>
             <h1>Iframe is below:</h1>
             <iframe src="${iframeUri}" id="host" frameBorder="0"></iframe>
+            <script src="${scriptSrcUri}" defer></script>
         </body>
         </html>`;
         panel.webview.html = outputHtml;
