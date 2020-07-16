@@ -1,65 +1,24 @@
-# webview-load-problem README
+# Repro for vscode issue 101562
 
-This is the README for your extension "webview-load-problem". After writing up a brief description, we recommend including the following sections.
+Thanks for looking at this repro. This is a minimal repro of this, scaffolded using the `yo code` generator.
 
-## Features
+## Main components
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Please note the following files:
 
-For example if there is an image subfolder under your extension project workspace:
+ - frontend/index.html -- this provides the theoretical main user interface for the application
+ - src/view.ts -- this initializes a WebView panel in a way that was compatible in VS Code 1.46 but fails in 1.47.
+ - src/extension.ts -- minimal implementation to register the `extension.helloWorld` command which calls `View.create()`, which causes the repro.
 
-\!\[feature X\]\(images/feature-x.png\)
+If you observe this (for instance, by reloading the webview) you receive the following:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+![Network error](./img/error-on-147.png)
 
-## Requirements
+The details are:
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+```
+Request URL: vscode-webview-resource://b24d6c3b-ff05-4a12-941f-cb7090e4f473/b24d6c3b-ff05-4a12-941f-cb7090e4f473/file///f%3A/proj/webview-load-problem/frontend/index.html
+Request Method: GET
+Status Code: 401 Unauthorized
+Referrer Policy: no-referrer-when-downgrade
+```

@@ -1,5 +1,9 @@
 {
 	"name": "webview-load-problem",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/robpaveza/vscode-webview-load-problem.git"
+	},
 	"displayName": "webview-load-problem",
 	"description": "",
 	"version": "0.0.1",
