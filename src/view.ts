@@ -31,7 +31,6 @@ export default class View implements vscode.Disposable {
                             script-src ${allowedFrameSrc} vscode-webview:;
                             style-src 'unsafe-inline' ${allowedFrameSrc};
                           ">
-            <title>Visual Studio Code Network Console</title>
             <style>
       html, body, iframe {
           width: 100%;
